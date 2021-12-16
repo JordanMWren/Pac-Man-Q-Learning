@@ -18,13 +18,14 @@ class Pacman(Character):
         self.pills_eaten = 0
         self.score = 0
         # Define the starting point for all Pac-Man agents in the grid
-        self.x = 0
-        self.y = 8
+        self.x = 12
+        self.y = 17
 
 class Ghost(Character):
-    def __init__(self, aggression):
+    def __init__(self, aggression, x, y):
         self.aggression = aggression
-        self.x = 4
-        self.y = 7
+        self.x = x
+        self.y = y
+        self.edible = False
 
 

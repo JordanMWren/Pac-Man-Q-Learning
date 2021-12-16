@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>166faaa4-85dd-4ec5-8692-5a85bb8406e2</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>step.py</StartupFile>
+    <StartupFile>Pac_Man_Q_Learning.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>

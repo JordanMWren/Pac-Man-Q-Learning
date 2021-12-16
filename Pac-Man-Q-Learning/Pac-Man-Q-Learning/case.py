@@ -1,3 +1,5 @@
+from random import uniform
+
 class Case:
     """
     This class is used to hold the 4 vectors of 4 values to represent the distances
@@ -10,10 +12,17 @@ class Case:
     weight_edible_ghosts = .25
 
     def __init__(self):
-        self.distance_pills = []
-        self.distance_powerpill = []
-        self.distance_inedible_ghost = []
-        self.distance_edible_ghost = []
+        self.distance_pills = ["FAR"] * 4
+        self.distance_powerpill = ["FAR"] * 4
+        self.distance_inedible_ghost = ["FAR"] * 4
+        self.distance_edible_ghost = ["FAR"] * 4
+        self.quality = {"UP": uniform(0,1), "DOWN": uniform(0,1), "LEFT": uniform(0,1), "RIGHT": uniform(0,1)}
+
+    def set_wall(self, index):
+        self.distance_pills[index] = "WALL"
+        self.distance_powerpill[index] = "WALL"
+        self.distance_inedible_ghost[index] = "WALL"
+        self.distance_edible_ghost[index] = "WALL"
 
     def similarity(self, other_case):
         dist_pills = 0
@@ -39,18 +48,18 @@ class Case:
         grid = board.grid
         possible_actions = board.possible_actions(x, y)
         if "UP" not in possible_actions:
-            __set_wall(0)
+            self.set_wall(0)
         if "RIGHT" not in possible_actions:
-            __set_wall(1)
+            self.set_wall(1)
         if "DOWN" not in possible_actions:
-            __set_wall(2)
+            self.set_wall(2)
         if "LEFT" not in possible_actions:
-            __set_wall(3)
+            self.set_wall(3)
         
         index = 0
         for action in possible_actions:
             distances = board.breadth_first_search(action, x, y)
-
+            
             if action == "UP":
                 index = 0
             elif action == "RIGHT":
@@ -61,13 +70,7 @@ class Case:
                 index = 3
             
             # set the distance values for the index
-            self.distance_pills[index] = distances[0]
-            self.distance_powerpill[index] = distances[1]
-            self.distance_inedible_ghost[index] = distances[2]
-            self.distance_edible_ghost[index] = distances[3]
-
-    def __set_wall(self, index):
-        self.distance_pills[index] = "WALL"
-        self.distance_powerpill[index] = "WALL"
-        self.distance_inedible_ghost[index] = "WALL"
-        self.distance_edible_ghost[index] = "WALL"
+            self.distance_pills[index] = distances["pill"]
+            self.distance_powerpill[index] = distances["powerpill"]
+            self.distance_inedible_ghost[index] = distances["ghost"]
+            self.distance_edible_ghost[index] = distances["edible_ghost"]

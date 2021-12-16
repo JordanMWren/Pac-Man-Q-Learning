@@ -18,9 +18,8 @@ initial_case.distance_powerpill = ["FAR"] * 4
 initial_case.distance_inedible_ghost = ["FAR"] * 4
 initial_case.distance_edible_ghost = ["FAR"] * 4
 
-# initialize the q table and case base and begin simulating episodes
-qtable = [[0] * 4]
+# initialize the case-base q table and case base and begin simulating episodes
 case_base = [initial_case]
 for i in range(500):
     episode = Episode()
-    episode.simulate(qtable, case_base)
+    episode.simulate(case_base)
